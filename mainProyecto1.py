@@ -1,5 +1,6 @@
 import turtle as tur
 import BusquedaAmplitud as BA
+import AlgoritmoCostoUniformeED as Giron
 
 
 ##Configuración básica de la ventana por medio de turtle
@@ -67,7 +68,7 @@ def conf_amb(maze):
 
 
 ## Ejecución inicial del programa
-def Inicio(arregloDibujo,maze):
+def Inicio(arregloDibujo,maze,ruta):
     print("Hola, bienvenido al solver de laberintos, ¿qué opción desea usar?" + "\n" + 
                     "Algoritmos no informados:" + "\n" +
                     "   1. Por amplitud " + "\n" +
@@ -91,6 +92,12 @@ def Inicio(arregloDibujo,maze):
             print("Tiempo: " + str(tiempo) + " Segundos")
         elif int(opcion) == 2:
             flag = False
+            movimientos, profundidad, nodosExpandidos, tiempo, posy, posx = Giron.busquedaCostoUniforme(ruta)
+            print("Posicion inicial: " + str([posy,posx]))
+            print("Movimientos: " + str(movimientos))
+            print("Profundidad: " + str(profundidad))
+            print("Nodos expandidos: " + str(nodosExpandidos))
+            print("Tiempo: " + str(tiempo) + " Segundos")
             None
         elif int(opcion) == 3:
             flag = False
@@ -129,7 +136,8 @@ def Inicio(arregloDibujo,maze):
 
 
 confBasica()
-maze = imp_amb("ambiente.txt")
+ruta = "ambiente.txt"
+maze = imp_amb(ruta)
 arregloDibujo = conf_amb(maze)
-Inicio(arregloDibujo,maze)
+Inicio(arregloDibujo,maze,ruta)
 tur.done()

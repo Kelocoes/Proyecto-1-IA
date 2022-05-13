@@ -3,7 +3,7 @@ from inspect import currentframe
 from shutil import move
 import time
 
-def busquedaCostoUniforme():
+def busquedaCostoUniforme(ruta):
     maze = list()
     #Movimientos
     movements = list() 
@@ -13,7 +13,7 @@ def busquedaCostoUniforme():
     """
     start = [0,0,0,[],0,0,0,"Inicio"]
     #Lectura del archivo 
-    with open("Prueba1.txt","r") as file_object:
+    with open(ruta,"r") as file_object:
         read = file_object.read()
         readWhSpaces = read.replace(' ','')
         maze = readWhSpaces.split("\n")
@@ -281,4 +281,3 @@ def busquedaCostoUniforme():
     
     
     return directions,profundidad,nodos,end,totalmovements[0][1],totalmovements[0][2]
-
