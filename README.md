@@ -6,7 +6,7 @@ Kevin David Rodríguez Belalcazar - 1841109
 
 Andrés Felipe Giron Pérez - 1842504
 
-Julián Andrés Salamanca Téllez - 1843654
+Julián Andrés Salamanca Téllez - 1841654
 
 Estudiantes de Ingeniería de Sistemas de la Universidad del Valle
 

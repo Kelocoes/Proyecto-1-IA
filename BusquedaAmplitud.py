@@ -153,7 +153,7 @@ def Arbol(estado):
                 else:
                     posibilidades = Sensor(estado,nodoActual,arbol)
                     #print("1",posibilidades)
-                    for j in range(len(posibilidades)):
+                    for j in range(len(posibilidades)): # [1,0,1,0]
                         if posibilidades[j] == 1:
                             posyAct,posxAct = Mover(j+1,nodoActual.posyActual,nodoActual.posxActual)
                             arbol[aux+1].append(Nodo(nodoActual.posItems,posyAct,posxAct,nodoActual.cantItems,aux,i,j+1,nodoActual.profundidad+1))
@@ -214,5 +214,3 @@ maze2 = [[5,0,2,5],
 [1,1,1,1],
 [1,1,1,1],
 ]
-
-

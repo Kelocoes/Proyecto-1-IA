@@ -1,6 +1,7 @@
 import turtle as tur
 import BusquedaAmplitud as BA
 import AlgoritmoCostoUniformeED as Giron
+import AlgoritmoAvara as Avara
 
 
 ##Configuración básica de la ventana por medio de turtle
@@ -104,6 +105,12 @@ def Inicio(arregloDibujo,maze,ruta):
             None
         elif int(opcion) == 4:
             flag = False
+            movimientos, profundidad, nodosExpandidos, tiempo, posy, posx = Avara.Avara(maze)
+            print("Posicion inicial: " + str([posy,posx]))
+            print("Movimientos: " + str(movimientos))
+            print("Profundidad: " + str(profundidad))
+            print("Nodos expandidos: " + str(nodosExpandidos))
+            print("Tiempo: " + str(tiempo) + " Segundos")
             None
         elif int(opcion) == 5:
             flag = False
@@ -133,8 +140,7 @@ def Inicio(arregloDibujo,maze,ruta):
         else:
             tur.goto(arregloDibujo[posy+1][posx].screen_x,arregloDibujo[posy+1][posx].screen_y)
             posy += 1
-
-
+        
 confBasica()
 ruta = "ambiente.txt"
 maze = imp_amb(ruta)
