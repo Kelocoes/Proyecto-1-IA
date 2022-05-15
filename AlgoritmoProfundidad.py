@@ -112,10 +112,10 @@ def algPrincipal(maze):
                expandir(maze, nodo) ## se expande el nodo
     if (flag): ## termina el ciclo, se imprime el tiempo
         tiempo = str(time.time()-start_time)
-        print(tiempo)
+        ##print(tiempo)
     ##print("Profundidad" + str(aux))
     ##print("Nodos expandidos" + str(NodosExp))
-    print(movimientosFinales)
+    ##print(movimientosFinales)
     return movimientosFinales,aux+1,NodosExp+1,tiempo,posy,posx ## revisar por que es +1 
 
 def PasosSolucion(nodo):

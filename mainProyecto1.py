@@ -2,6 +2,7 @@ import turtle as tur
 import BusquedaAmplitud as BA
 import AlgoritmoCostoUniformeED as Giron
 import AlgoritmoAvara as Avara
+import AlgoritmoProfundidad as Julian
 
 
 ##Configuración básica de la ventana por medio de turtle
@@ -102,6 +103,12 @@ def Inicio(arregloDibujo,maze,ruta):
             None
         elif int(opcion) == 3:
             flag = False
+            movimientos, profundidad, nodosExpandidos, tiempo, posy, posx = Julian.algPrincipal(maze)
+            print("Posicion inicial: " + str([posy,posx]))
+            print("Movimientos: " + str(movimientos))
+            print("Profundidad: " + str(profundidad))
+            print("Nodos expandidos: " + str(nodosExpandidos))
+            print("Tiempo: " + str(tiempo) + " Segundos")
             None
         elif int(opcion) == 4:
             flag = False
