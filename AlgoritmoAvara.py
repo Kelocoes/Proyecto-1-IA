@@ -226,4 +226,4 @@ maze1 = [
 ]
 
 #print(maze)
-print(Avara(maze))
+#print(Avara(maze))
