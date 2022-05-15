@@ -41,7 +41,7 @@ class Pila():
 #Posiciones de los items tomados
 #Posicion actual
 #Cantidad de items tomados
-#Posicion del madre en el arbol
+#Nodo padre -> objeto nodo que es padre del nodo actual 
 #Operador realizado en este nodo,
 #Profundidad del arbol actual
 class Nodo():
@@ -61,13 +61,12 @@ class Nodo():
 ## Algoritmo principal
 pila = Pila()
 
-def Arbol(maze): 
+def algPrincipal(maze): 
     start_time = time.time() ## se toma el tiempo
     posy = -1
     posx = -1
 
     ## Conocer la posicion inicial del objeto / bot
-    
     for i in range(len(maze)): 
         for j in range(len(maze[i])): 
             if (maze[i][j] == 2): ## punto inicial
@@ -88,7 +87,7 @@ def Arbol(maze):
             break
         else: 
             nodo = pila.top()
-            if (aux < nodo.profundidad): 
+            if (aux < nodo.profundidad): ## Se toma la profundidad mayor entre todos los nodos expandidos
                     aux = nodo.profundidad
             ##print([nodo.posxActual, nodo.posyActual, nodo.cantItems])
             if (maze[nodo.posyActual][nodo.posxActual] == 5): 
@@ -98,6 +97,7 @@ def Arbol(maze):
                     arr = nodo.posItems.copy()
                     arr.append([nodo.posyActual, nodo.posxActual])
                     nodo.posItems = arr
+            
             if (nodo.cantItems == 2): 
                 if (aux < nodo.profundidad): 
                     aux = nodo.profundidad
@@ -110,19 +110,19 @@ def Arbol(maze):
             else: 
                NodosExp = NodosExp + 1 
                expandir(maze, nodo) ## se expande el nodo
-    if (flag): 
+    if (flag): ## termina el ciclo, se imprime el tiempo
         tiempo = str(time.time()-start_time)
         print(tiempo)
     ##print("Profundidad" + str(aux))
     ##print("Nodos expandidos" + str(NodosExp))
     print(movimientosFinales)
-    return movimientosFinales,aux+1,NodosExp+1,tiempo,posy,posx ## revisar 
+    return movimientosFinales,aux+1,NodosExp+1,tiempo,posy,posx ## revisar por que es +1 
 
 def PasosSolucion(nodo):
     dir = {1 : "Izquierda" , 2 : "Arriba" , 3 : "Derecha" , 4 : "Abajo", 7: "Inicio" }
-    arr = []
-    arr.append(dir[nodo.operador])
+    arr = [dir[nodo.operador]]
     nodoPadre = nodo.nodoPadre
+    ## se realiza un camino hasta el nodo inicial (aquel que no tiene padre) para trazar el camino del bot
     while not(nodoPadre is None): 
         arr.append(dir[nodoPadre.operador])
         nodoPadre = nodoPadre.nodoPadre
@@ -144,10 +144,10 @@ def Mover(dir, posy, posx):
     elif (dir == 2): ## ariba
         posyActual = posy-1
         posxActual = posx
-    elif (dir == 3): 
+    elif (dir == 3):  ## der 
         posyActual = posy
         posxActual = posx+1
-    elif (dir == 4): 
+    elif (dir == 4): ## abajo
         posyActual = posy+1
         posxActual = posx
     return posyActual, posxActual
@@ -215,4 +215,4 @@ maze2 = [[5,0,2,5],
 [1,1,1,1],
 ]
 
-Arbol(maze)
+algPrincipal(maze)
