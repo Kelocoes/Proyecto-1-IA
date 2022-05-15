@@ -62,7 +62,7 @@ def getProfundidad(arbol,movTotal):
                 road.insert(0,movTotal[road[0].posPadre])
         
         profundidades.append(len(road))
-  
+
     return max(profundidades)
 
 #A partir del camino encontrado, se realiza una transformación de una lista de numeros a una lista de strings donde menciona los movimientos realizados, para su posterior uso en el archivo mainProyecto1.py
@@ -86,10 +86,12 @@ def Sensor(lab,nodo,movTotal):
     abajo = 0 if posy+1==len(lab) or lab[posy+1][posx] == 1 else 1
 
     arr = [izq,arriba,der,abajo]
-  
-    #Cambio, no permitir que se devuelva, esto dependerá si el estado siguiente es exactamente igual al estado anterior del nodo actual
-    if (nodo.posPadre != -1):
-        padre = movTotal[nodo.posPadre]
+
+    #Cambio, no permitir que se devuelva y evite ciclos
+    
+    pos = nodo.posPadre
+    while (pos != -1):
+        padre = movTotal[pos]
         if (nodo.operador == 1):
             if nodo.posItems == padre.posItems and nodo.posyActual == padre.posyActual and nodo.posxActual +1 == padre.posxActual and nodo.idnave == padre.idnave:
                 arr[2] = 0
@@ -97,12 +99,12 @@ def Sensor(lab,nodo,movTotal):
             if nodo.posItems == padre.posItems and nodo.posyActual + 1 == padre.posyActual and nodo.posxActual == padre.posxActual and nodo.idnave == padre.idnave:
                 arr[3] = 0
         elif (nodo.operador == 3):
-              if nodo.posItems == padre.posItems and nodo.posyActual == padre.posyActual and nodo.posxActual - 1 == padre.posxActual and nodo.idnave == padre.idnave :
+            if nodo.posItems == padre.posItems and nodo.posyActual == padre.posyActual and nodo.posxActual - 1 == padre.posxActual and nodo.idnave == padre.idnave :
                 arr[0] = 0
         else:
             if nodo.posItems == padre.posItems and nodo.posyActual - 1 == padre.posyActual and nodo.posxActual  == padre.posxActual and nodo.idnave == padre.idnave:
                 arr[1] = 0
-
+        pos = padre.posPadre
     return arr
 
 
@@ -163,7 +165,7 @@ def Avara(lab):
     arbol = [Nodo(functionH(posy,posx,posItems,[]),posy,posx, [], 0, -1, 0,7)]
     flag = False
     aux = 0
-  
+
     while(True):
         #print("Ciclo: " + str(aux))
         arbol.sort(key = Heuristica)
@@ -218,6 +220,10 @@ maze = [
     [1, 0, 1, 0, 1, 0, 1, 1, 1, 1], 
     [1, 0, 0, 0, 6, 6, 6, 0, 0, 5]]
 
+maze1 = [
+    [2,0],
+    [5,5]
+]
 
 #print(maze)
-#print(Avara(maze))
+print(Avara(maze))
