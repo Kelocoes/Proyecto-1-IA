@@ -60,9 +60,8 @@ def getProfundidad(arbol,movTotal):
 
         while road[0].posPadre != -1:
                 road.insert(0,movTotal[road[0].posPadre])
-        
+                
         profundidades.append(len(road))
-
     return max(profundidades)
 
 #A partir del camino encontrado, se realiza una transformación de una lista de numeros a una lista de strings donde menciona los movimientos realizados, para su posterior uso en el archivo mainProyecto1.py
@@ -226,4 +225,4 @@ maze1 = [
 ]
 
 #print(maze)
-#print(Avara(maze))
+#print(Avara(maze1))

@@ -74,7 +74,7 @@ def algPrincipal(maze):
                 posx = j
                 break
     aux = 0
-    NodosExp = 1
+    NodosExp = 0
     ## creacion de nodo raiz
     ##print(posx, posy)
     pila.push(Nodo([], posy, posx, 0, None, 7, 0))  ## 7 de inicio 
@@ -88,7 +88,8 @@ def algPrincipal(maze):
         else: 
             nodo = pila.top()
             if (aux < nodo.profundidad): ## Se toma la profundidad mayor entre todos los nodos expandidos
-                    aux = nodo.profundidad
+                aux = nodo.profundidad
+
             ##print([nodo.posxActual, nodo.posyActual, nodo.cantItems])
             if (maze[nodo.posyActual][nodo.posxActual] == 5): 
                 if not(LoAgarro(nodo)): 
@@ -99,6 +100,7 @@ def algPrincipal(maze):
                     nodo.posItems = arr
             
             if (nodo.cantItems == 2): 
+                
                 if (aux < nodo.profundidad): 
                     aux = nodo.profundidad
 
@@ -108,15 +110,15 @@ def algPrincipal(maze):
                 movimientosFinales = arr[::-1]
                 break
             else: 
-               NodosExp = NodosExp + 1 
-               expandir(maze, nodo) ## se expande el nodo
+                NodosExp = NodosExp + 1 
+                expandir(maze, nodo) ## se expande el nodo
     if (flag): ## termina el ciclo, se imprime el tiempo
         tiempo = str(time.time()-start_time)
         ##print(tiempo)
     ##print("Profundidad" + str(aux))
     ##print("Nodos expandidos" + str(NodosExp))
     ##print(movimientosFinales)
-    return movimientosFinales,aux+1,NodosExp+1,tiempo,posy,posx ## revisar por que es +1 
+    return movimientosFinales,aux,NodosExp,tiempo,posy,posx ## revisar por que es +1 
 
 def PasosSolucion(nodo):
     dir = {1 : "Izquierda" , 2 : "Arriba" , 3 : "Derecha" , 4 : "Abajo", 7: "Inicio" }
@@ -131,7 +133,7 @@ def PasosSolucion(nodo):
 def expandir(maze, nodo): 
     posibilidades = Sensor(maze, nodo)
     ##print("itt" + str(posibilidades))
-    for j in range(len(posibilidades)): 
+    for j in range(len(posibilidades)-1,-1,-1): 
         if posibilidades[j] == 1: 
             posyAct, posxAct = Mover(j+1, nodo.posyActual, nodo.posxActual)
             nodoExpand = Nodo(nodo.posItems, posyAct, posxAct, nodo.cantItems, nodo, j+1, nodo.profundidad+1)
@@ -214,5 +216,3 @@ maze2 = [[5,0,2,5],
 [1,1,1,1],
 [1,1,1,1],
 ]
-
-algPrincipal(maze)
