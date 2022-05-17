@@ -1,6 +1,7 @@
 import turtle as tur
 import BusquedaAmplitud as BA
 import AlgoritmoCostoUniformeED as Giron
+import AEstrellaED as Giron2
 import AlgoritmoAvara as Avara
 import AlgoritmoProfundidad as Julian
 
@@ -121,6 +122,12 @@ def Inicio(arregloDibujo,maze,ruta):
             None
         elif int(opcion) == 5:
             flag = False
+            movimientos, profundidad, nodosExpandidos, tiempo, posy, posx = Giron2.AEstrella(ruta)
+            print("Posicion inicial: " + str([posy,posx]))
+            print("Movimientos: " + str(movimientos))
+            print("Profundidad: " + str(profundidad))
+            print("Nodos expandidos: " + str(nodosExpandidos))
+            print("Tiempo: " + str(tiempo) + " Segundos")
             None
         else:
             print("Error en la elección, por favor escoja de nuevo")
