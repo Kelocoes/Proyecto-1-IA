@@ -306,7 +306,7 @@ def busquedaCostoUniforme(ruta):
         profundidades.append(len(road))
 
     profundidad = max(profundidades)
-    print(profundidades[0])
+    #print(profundidades[0])
 
     directions = list() #Direcciones que toma en "lenguaje natural" ej: "Arriba" "Abajo" "Izquierda" "Derecha"
 
