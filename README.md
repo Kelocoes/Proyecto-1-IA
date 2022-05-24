@@ -23,4 +23,6 @@ python mainProyecto1.py
 
 A partir de esto se abritá el apartado gráfico y desde la consola se podrá escoger el algoritmo a usar mediante un número, además de esto se puede editar el laberinto en el archivo "ambiente.txt", la información respecto al algoritmo se presentará en la consola (profundidad, nodos expandidos, tiempo de ejecución).
 
+Si se desea probar otro algoritmo, cerrar la ventana y volver a ejecutar el comando.
+
 Enjoy ;) Att: Kevin 
