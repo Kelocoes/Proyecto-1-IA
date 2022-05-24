@@ -15,3 +15,12 @@ Introducción a la inteligencia artificial
 
 # Docente a cargo
 Oscar Fernando Bedoya Leiva
+
+# Ejecución
+Dentro de la carpeta del repositorio, realizar el siguiente comando en la terminal:
+
+python mainProyecto1.py
+
+A partir de esto se abritá el apartado gráfico y desde la consola se podrá escoger el algoritmo a usar mediante un número, además de esto se puede editar el laberinto en el archivo "ambiente.txt", la información respecto al algoritmo se presentará en la consola (profundidad, nodos expandidos, tiempo de ejecución).
+
+Enjoy ;) Att: Kevin 
