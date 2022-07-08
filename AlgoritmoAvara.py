@@ -11,6 +11,8 @@ gas --> Combustible disponible
 posPadre --> Posicion del padre en el arreglo de movimientosTotales
 idnave --> 0 Si no tiene nave 3 Si es la nave es la de 10 4 Si es la nave de 20
 """
+dir = {1 : "Izquierda" , 2 : "Arriba" , 3 : "Derecha" , 4 : "Abajo", 7: "Inicio" }
+
 class Nodo():
     def __init__(self,h, posyActual, posxActual, posItems, gas, posPadre, idnave, operador):
         self.h = h
@@ -83,29 +85,19 @@ def Sensor(lab,nodo,movTotal):
     arriba = 0 if posy-1<0 or lab[posy-1][posx] == 1 else 1
     der = 0 if posx+1==len(lab) or lab[posy][posx+1] == 1 else 1
     abajo = 0 if posy+1==len(lab) or lab[posy+1][posx] == 1 else 1
-
     arr = [izq,arriba,der,abajo]
-
     #Cambio, no permitir que se devuelva y evite ciclos
     
-    pos = nodo.posPadre
-    while (pos != -1):
-        padre = movTotal[pos]
-        if (nodo.operador == 1):
-            if nodo.posItems == padre.posItems and nodo.posyActual == padre.posyActual and nodo.posxActual +1 == padre.posxActual and nodo.idnave == padre.idnave:
-                arr[2] = 0
-        elif (nodo.operador == 2):
-            if nodo.posItems == padre.posItems and nodo.posyActual + 1 == padre.posyActual and nodo.posxActual == padre.posxActual and nodo.idnave == padre.idnave:
-                arr[3] = 0
-        elif (nodo.operador == 3):
-            if nodo.posItems == padre.posItems and nodo.posyActual == padre.posyActual and nodo.posxActual - 1 == padre.posxActual and nodo.idnave == padre.idnave :
-                arr[0] = 0
-        else:
-            if nodo.posItems == padre.posItems and nodo.posyActual - 1 == padre.posyActual and nodo.posxActual  == padre.posxActual and nodo.idnave == padre.idnave:
-                arr[1] = 0
-        pos = padre.posPadre
+    for i in range(len(arr)): 
+        if arr[i] == 1: 
+            posyAct, posxAct = Mover(i+1,posy,posx)
+            pos = nodo.posPadre
+            while (pos != -1):
+                padre = movTotal[pos]
+                if nodo.posItems == padre.posItems and posyAct == padre.posyActual and posxAct == padre.posxActual and nodo.idnave == padre.idnave:
+                    arr[i] = 0
+                pos = padre.posPadre
     return arr
-
 
 #Funcion de movimientos, retorna las nuevas coordenadas dependiendo de la dirección escogida
 def Mover(dir,posy,posx):
@@ -166,8 +158,8 @@ def Avara(lab):
     aux = 0
 
     while(True):
-        #print("Ciclo: " + str(aux))
         arbol.sort(key = Heuristica)
+        #print(aux,arbol[0].posyActual,arbol[0].posxActual,arbol[0].h)
         if Finaliza(arbol[0]):
             road = ReconstruirCamino(arbol,movTotal)
             nodosExp = len(movTotal) + 1
@@ -187,9 +179,13 @@ def Avara(lab):
                     if lab[posyAct][posxAct] == 5 and not(LoAgarro(posyAct,posxAct,posItemsNew)): #Si el nodo actual se encuentre en un item y no se ha agarrado, tomarlo
                         posItemsNew.append([posyAct,posxAct])
                     arbol.append(Nodo(functionH(posyAct, posxAct, posItems, posItemsNew), posyAct, posxAct, posItemsNew, arbol[0].gas, len(movTotal), arbol[0].idnave, j+1))
-            movTotal.append(arbol[0])#Mover el nodo expandido a movTotañ
-            del arbol[0]#Borrar el nodo de la cola de prioridad
+            #[print("pos",i.h,dir[i.operador],i.posyActual,i.posxActual,i.posPadre) for i in arbol]
+            movTotal.append(arbol[0])#Mover el nodo expandido a movTotal
+            arbol.pop(0)#Borrar el nodo de la cola de prioridad
 
+        #road = ReconstruirCamino(arbol,movTotal)
+        #movimientosFinales = CambioMov(road)
+        #print(movimientosFinales)
         aux += 1
         if (flag):
             break
