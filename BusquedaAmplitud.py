@@ -57,7 +57,7 @@ def Mover(dir,posy,posx):
 #Posicion actual
 #Cantidad de items tomados
 #Posicion del madre en el arbol
-#Operador realizado en este nodo,
+#Operador realizado en este nodo
 #Profundidad del arbol actual
 class Nodo():
     #PosItems es un arreglo ce las coordenadas de los items que ha tomado, vacio significa que no tiene ningún item
@@ -77,12 +77,27 @@ class Nodo():
 def PasosSolucion(arbol, posy, posx):
     dir = {1 : "Izquierda" , 2 : "Arriba" , 3 : "Derecha" , 4 : "Abajo", 7: "Inicio" }
     arr = []
+    arrSus = []
+    print(len(arbol)-1)
     for i in range(len(arbol)-1):
         anteriory = arbol[posy][posx].padrey
         anteriorx = arbol[posy][posx].padrex
         arr.append(dir[arbol[posy][posx].operador])
+        arrSus.append([arbol[posy][posx].posyActual,arbol[posy][posx].posxActual,arbol[posy][posx].posItems])
         posy = anteriory
         posx = anteriorx
+    
+    counter = 0
+    itemy = -1
+    itemx = -1
+    for i in range(len(arrSus)):
+        if (arrSus[i][0] == 2 and arrSus[i][1] == 5):
+            counter +=1
+        elif (len(arrSus[i][2]) == 1):
+            itemy = arrSus[i][2][0][0]
+            itemx = arrSus[i][2][0][1]
+    print("Veces pasando por 2,5: " + str(counter))
+    print("Pos del primer item agarrado: " + str(itemy) + " " + str(itemx))
     return arr
 
 

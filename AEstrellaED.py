@@ -12,9 +12,10 @@ def AEstrella(ruta):
     totalmovements = list()
 
     """cada nodo es una lista que contiene el costo de moverse, la posicion Y y X, en ese orden,
-    seguido de la bosa de items, combustible de la nave, posicion del padre en la lista,orden y heuristica
+    seguido de la bosa de items, combustible de la nave, posicion del padre en la lista,identificador de la 
+    nave y orden
     """
-    start = [0,0,0,[],0,0,0,"Inicio",0]
+    start = [0,0,0,[],0,0,[0,0],"Inicio",0]
     #Arreglo para guardar las posiciones de los artefactos
     items = list()
 
@@ -72,15 +73,17 @@ def AEstrella(ruta):
             if maze[y+1][x] == "3":
                 newNode[0] = newNode[0] + 1
                 newNode[1] = newNode[1] + 1
-                if newNode[4] == 0:
+                newNode[6] = list(currentPos[6])
+                if newNode[6][0] == 0 and newNode[4] == 0:
                     newNode[4] = 11
-                    newNode[6] = 3
+                    newNode[6][0] = 3
             if maze[y+1][x] == "4":
                 newNode[0] = newNode[0] + 1
                 newNode[1] = newNode[1] + 1
-                if newNode[4] == 0:
+                newNode[6] = list(currentPos[6])
+                if newNode[6][1] == 0 and newNode[4] == 0:
                     newNode[4] = 21
-                    newNode[6] = 4
+                    newNode[6][1] = 4
             if maze[y+1][x] == "5":
                 newNode[0] = newNode[0] + 1
                 newNode[1] = newNode[1] + 1
@@ -108,8 +111,6 @@ def AEstrella(ruta):
 
             if newNode[4] > 0:
                 newNode[4] = newNode[4] -1 #Si hay combustible restele 1 uso 
-            if newNode[4] == 0:
-                newNode[6] = 0 #cuando no hay combustible, cambia el identificador de la nave a 0
 
             #Verifica si el estado del newNode es distinto al de su abuelo
             #usando como criterios Y,X,bolsa de items,identificador de la nave
@@ -128,15 +129,17 @@ def AEstrella(ruta):
             if maze[y][x-1] == "3":
                 newNode[0] = newNode[0] + 1
                 newNode[2] = newNode[2] - 1
-                if newNode[4] == 0:
+                newNode[6] = list(currentPos[6])
+                if newNode[6][0] == 0 and newNode[4] == 0:
                     newNode[4] = 11
-                    newNode[6] = 3
+                    newNode[6][0] = 3
             if maze[y][x-1] == "4":
                 newNode[0] = newNode[0] + 1
                 newNode[2] = newNode[2] - 1
-                if newNode[4] == 0:
+                newNode[6] = list(currentPos[6])
+                if newNode[6][1] == 0 and newNode[4] == 0:
                     newNode[4] = 21
-                    newNode[6] = 4
+                    newNode[6][1] = 4
             if maze[y][x-1] == "5":
                 newNode[0] = newNode[0] + 1
                 newNode[2] = newNode[2] - 1
@@ -163,8 +166,6 @@ def AEstrella(ruta):
             
             if newNode[4] > 0:
                 newNode[4] = newNode[4] -1 #Si hay combustible restele 1 uso 
-            if newNode[4] == 0:
-                newNode[6] = 0 #cuando no hay combustible, cambia el identificador de la nave a 0
 
             #Verifica si el estado del newNode es distinto al de su abuelo
             #usando como criterios Y,X,bolsa de items,identificador de la nave
@@ -183,15 +184,17 @@ def AEstrella(ruta):
             if maze[y-1][x] == "3":
                 newNode[0] = newNode[0] + 1
                 newNode[1] = newNode[1] - 1
-                if newNode[4] == 0:
+                newNode[6] = list(currentPos[6])
+                if newNode[6][0] == 0 and newNode[4] == 0:
                     newNode[4] = 11
-                    newNode[6] = 3
+                    newNode[6][0] = 3
             if maze[y-1][x] == "4": 
                 newNode[0] = newNode[0] + 1
                 newNode[1] = newNode[1] - 1
-                if newNode[4] == 0:
+                newNode[6] = list(currentPos[6])
+                if newNode[6][1] == 0 and newNode[4] == 0:
                     newNode[4] = 21
-                    newNode[6] = 4
+                    newNode[6][1] = 4
             if maze[y-1][x] == "5":
                 newNode[0] = newNode[0] + 1
                 newNode[1] = newNode[1] - 1
@@ -217,8 +220,6 @@ def AEstrella(ruta):
 
             if newNode[4] > 0:
                 newNode[4] = newNode[4] -1 #Si hay combustible restele 1 uso 
-            if newNode[4] == 0:
-                newNode[6] = 0 #cuando no hay combustible, cambia el identificador de la nave a 0
 
             #Verifica si el estado del newNode es distinto al de su abuelo
             #usando como criterios Y,X,bolsa de items,identificador de la nave
@@ -237,15 +238,16 @@ def AEstrella(ruta):
             if maze[y][x+1] == "3":
                 newNode[0] = newNode[0] + 1
                 newNode[2] = newNode[2] + 1
-                if newNode[4] == 0:
+                newNode[6] = list(currentPos[6])
+                if newNode[6][0] == 0 and newNode[4] == 0:
                     newNode[4] = 11
-                    newNode[6] = 3
+                    newNode[6][0] = 3
             if maze[y][x+1] == "4":
                 newNode[0] = newNode[0] + 1
                 newNode[2] = newNode[2] + 1
-                if newNode[4] == 0:
+                if newNode[6][1] == 0 and newNode[4] == 0:
                     newNode[4] = 21
-                    newNode[6] = 4
+                    newNode[6][1] = 4
             if maze[y][x+1] == "5":
                 newNode[0] = newNode[0] + 1
                 newNode[2] = newNode[2] + 1
@@ -271,8 +273,6 @@ def AEstrella(ruta):
     
             if newNode[4] > 0:
                 newNode[4] = newNode[4] - 1 #Si hay combustible restele 1 uso 
-            if newNode[4] == 0:
-                newNode[6] = 0 #cuando no hay combustible, cambia el identificador de la nave a 0
 
             #Verifica si el estado del newNode es distinto al de su abuelo
             #usando como criterios Y,X,bolsa de items,identificador de la nave
@@ -339,17 +339,20 @@ def AEstrella(ruta):
 
         while road[0][0] != 0:
             road.insert(0,totalmovements[road[0][5]])
-        
         profundidades.append(len(road))
+
+
 
     profundidad = max(profundidades)
 
     directions = list() #Direcciones que toma en "lenguaje natural" ej: "Arriba" "Abajo" "Izquierda" "Derecha"
 
+    contador = 0
     for i in camino:
         directions.append(i[7])
-        
-    #print(items,start)
+
     
+
+    #print(items,start)
     return directions,profundidad,nodos,end,totalmovements[0][1],totalmovements[0][2]
     #return totalmovements[0][0],"\n",camino
