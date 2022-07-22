@@ -77,7 +77,6 @@ class Nodo():
 def PasosSolucion(arbol, posy, posx):
     dir = {1 : "Izquierda" , 2 : "Arriba" , 3 : "Derecha" , 4 : "Abajo", 7: "Inicio" }
     arr = []
-    print(len(arbol)-1)
     for i in range(len(arbol)-1):
         anteriory = arbol[posy][posx].padrey
         anteriorx = arbol[posy][posx].padrex
